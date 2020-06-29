@@ -1,18 +1,10 @@
-# from django.urls import path
-# from app import views
-
-# urlpatterns = [
-#     path('tasks/', views.task_list),
-#     path('tasks/<int:pk>/', views.task_detail),
-# ]
-
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from app import views
 
 urlpatterns = [
-    path('tasks/', views.task_list),
-    path('tasks/<int:pk>', views.task_detail),
+    path('tasks/', views.TaskList.as_view()),
+    path('tasks/<int:pk>', views.TaskDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
