@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User, AbstractUser
 
 # Create your models here.
 class Task(models.Model):
@@ -9,3 +10,8 @@ class Task(models.Model):
     class Meta:
         ordering = ['created']
 
+
+class User(AbstractUser):
+
+    def __str__(self):
+        return self.username
