@@ -1,7 +1,13 @@
 from rest_framework import serializers
-from app.models import Task
+from . import models
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Task
+        model = models.Task
         fields = ['id', 'title', 'description']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ('id', 'username', 'email')

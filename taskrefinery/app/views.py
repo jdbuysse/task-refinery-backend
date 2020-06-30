@@ -1,19 +1,25 @@
-from app.models import Task
-from app.serializers import TaskSerializer
+from . import models
+from app.serializers import TaskSerializer, UserSerializer
 
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status, generics, mixins, viewsets, permissions
+
+
+class UsersList(generics.ListCreateAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny,]
 
 
 class TaskList(generics.ListCreateAPIView):
-    queryset = Task.objects.all()
+    queryset = models.Task.objects.all()
     serializer_class = TaskSerializer
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Task.objects.all()
+    queryset = models.Task.objects.all()
     serializer_class = TaskSerializer
 
 
