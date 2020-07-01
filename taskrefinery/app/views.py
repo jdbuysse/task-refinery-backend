@@ -7,20 +7,29 @@ from rest_framework.response import Response
 from rest_framework import status, generics, mixins, viewsets, permissions
 
 
-class UsersList(generics.ListCreateAPIView):
+class UsersList(generics.ListAPIView): #should this allow create as well as list?
     queryset = models.User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny,]
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
 
 
 class TaskList(generics.ListCreateAPIView):
     queryset = models.Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 # verbose version below so you can reference
