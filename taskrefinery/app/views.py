@@ -44,7 +44,7 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     #     serializer = TaskSerializer(obj, data=request.data, partial=True)
 
 
-class SubtaskList(viewsets.ModelViewSet):
+class SubtaskList(generics.ListCreateAPIView):
     queryset = models.Subtask.objects.all()
     serializer_class = SubtaskSerializer
     permission_classes= [permissions.AllowAny]

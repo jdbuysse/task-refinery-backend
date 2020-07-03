@@ -20,9 +20,7 @@ class Task(models.Model):
 class Subtask(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=200)
-    #data = models.JSONField(type=dict, default={}) probably have to do something like this
-
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="subtasks") #add these? , null=True, blank=True
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="subtasks", null=True, blank=True)
     completedness = models.IntegerField(default='1')
 
     class Meta:
@@ -31,7 +29,7 @@ class Subtask(models.Model):
     def __str__(self):
         return self.content
 
-# essentially the same as importing User above
+# same as importing User above
 class User(AbstractUser):
 
     def __str__(self):
