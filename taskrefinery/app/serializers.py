@@ -8,8 +8,8 @@ class SubtaskSerializer(serializers.ModelSerializer):
     task_id = serializers.IntegerField(required=True)
     class Meta:
         model = models.Subtask
-        #fields = ['id', 'content', 'task']
-        fields = ('__all__')
+        fields = ['id', 'content','completedness', 'task','task_id'] #throws error if I don't include the task/task_id
+        #fields = ('__all__')
 
 
 
