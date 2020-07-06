@@ -17,7 +17,8 @@ urlpatterns = [
     path('api/token/refresh', TokenRefreshView.as_view()),
     path('users/', views.UsersList.as_view()),
     path('users/<int:pk>', views.UserDetail.as_view()),
-    path('subtasks/', views.SubtaskList.as_view())
+    path('subtasks/', views.SubtaskList.as_view()),
+    path('create/', views.CreateUser.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

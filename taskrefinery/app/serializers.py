@@ -23,10 +23,13 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    tasks = TaskSerializer(many=True, read_only=True)
+
     class Meta:
         model = models.User
         fields = ('id', 'username', 'tasks', 'password')
         extra_kwargs = { 'password': {'write_only': True }}
+        depth = 2
 
     def create(self, validated_data):
         user = models.User.objects.create(
